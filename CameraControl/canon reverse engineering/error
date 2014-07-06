@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<ErrorStatus xmlns="urn:schemas-canon-com:service:MobileConnectedCameraService:1">
+  <errorCode>600</errorCode>
+  <errorDescription>Argument Value Invalid</errorDescription>
+</ErrorStatus>

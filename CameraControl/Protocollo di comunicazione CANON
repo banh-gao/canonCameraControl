@@ -1,0 +1,28 @@
+Per attivare fotocamera:
+POST su:
+http://192.168.0.74:8615/MobileConnectedCamera/UsecaseStatus?Name=ObjectPull&MajorVersion=1&MinorVersion=0
+
+con:
+<?xml version="1.0"?>
+<ParamSet xmlns="urn:schemas-canon-com:service:MobileConnectedCameraService:1">
+  <Status>Run</Status>
+</ParamSet>
+
+Richiesta lista immagini:
+http://192.168.0.74:8615/MobileConnectedCamera/ObjIDList?StartIndex=1&MaxNum=2147483647&ObjType=ALL
+
+Dimensioni singola immagine:
+http://192.168.0.74:8615/MobileConnectedCamera/ObjProperty?ObjID=26216848&ObjType=MOV
+
+Scaricamento singola immagine:
+http://192.168.0.74:8615/MobileConnectedCamera/ObjData?ObjID=26216848&ObjType=MOV&Offset=<num>
+
+Per disattivare fotocamera:
+POST su:
+http://192.168.0.74:8615/MobileConnectedCamera/UsecaseStatus?Name=ObjectPull&MajorVersion=1&MinorVersion=0
+
+con:
+<?xml version="1.0"?>
+<ParamSet xmlns="urn:schemas-canon-com:service:MobileConnectedCameraService:1">
+  <Status>Stop</Status>
+</ParamSet>

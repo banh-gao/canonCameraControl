@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+	xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.example.org/canon/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	name="canon" targetNamespace="http://www.example.org/canon/">
+	<wsdl:types>
+		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+			targetNamespace="http://www.example.org/canon/">
+			<xsd:element name="ParamSet" type="xsd:string"></xsd:element>
+			<xsd:element name="ResultSet" type="xsd:string"></xsd:element>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="ObjIDListRequest">
+		<wsdl:part name="startIndex" type="xsd:int" />
+		<wsdl:part name="maxNum" type="xsd:int"></wsdl:part>
+		<wsdl:part name="objType" type="xsd:string"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ObjIDListResponse">
+		<wsdl:part name="objectList" element="tns:ResultSet"/>
+	</wsdl:message>
+	<wsdl:message name="ObjPropertyRequest">
+		<wsdl:part name="ObjID" type="xsd:int"></wsdl:part>
+		<wsdl:part name="ObjType" type="xsd:string"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ObjPropertyResponse">
+		<wsdl:part name="ObjInfo" element="tns:ResultSet"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="UsecaseStatusRequest">
+        <wsdl:part name="Name" type="xsd:string"></wsdl:part>
+		<wsdl:part name="MajorVersion" type="xsd:int"></wsdl:part>
+		<wsdl:part name="MinorVersion" type="xsd:int"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="UsecaseStatusResponse">
+        <wsdl:part name="ResultSet" element="tns:ResultSet"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ObjDataRequest">
+		<wsdl:part name="ObjID" type="xsd:int"></wsdl:part>
+		<wsdl:part name="ObjType" type="xsd:string"></wsdl:part>
+		<wsdl:part name="Offset" type="xsd:int"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ObjDataResponse">
+		<wsdl:part name="ObjDataResponse" type="xsd:hexBinary"></wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="mediaAccess">
+		<wsdl:operation name="ObjIDList">
+			<wsdl:input message="tns:ObjIDListRequest" />
+			<wsdl:output message="tns:ObjIDListResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="ObjProperty">
+			<wsdl:input message="tns:ObjPropertyRequest"></wsdl:input>
+			<wsdl:output message="tns:ObjPropertyResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ObjData">
+			<wsdl:input message="tns:ObjDataRequest"></wsdl:input>
+			<wsdl:output message="tns:ObjDataResponse"></wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:portType name="cameraControl">
+		<wsdl:operation name="UsecaseStatus">
+			<wsdl:input message="tns:UsecaseStatusRequest"></wsdl:input>
+			<wsdl:output message="tns:UsecaseStatusResponse"></wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="mediaAccess" type="tns:mediaAccess">
+		<http:binding verb="GET" />
+		<wsdl:operation name="ObjIDList">
+			<http:operation location="/ObjIDList" />
+			<wsdl:input>
+				<http:urlEncoded />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ObjProperty">
+			<http:operation location="/ObjProperty" />
+			<wsdl:input>
+				<http:urlEncoded />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ObjData">
+			<http:operation location="/ObjIDList" />
+			<wsdl:input>
+				<http:urlEncoded />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:binding name="cameraControl" type="tns:cameraControl">
+		<http:binding verb="POST" />
+		<wsdl:operation name="UsecaseStatus">
+			<http:operation location="/NewOperation" />
+			<wsdl:input>
+				<mime:content type="application/x-www-form-urlencoded" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="canon">
+		<wsdl:port name="cameraControl" binding="tns:cameraControl">
+			<http:address location="http://www.example.org/" />
+		</wsdl:port>
+		<wsdl:port name="mediaAccess" binding="tns:mediaAccess">
+			<http:address location="http://www.example.org/" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

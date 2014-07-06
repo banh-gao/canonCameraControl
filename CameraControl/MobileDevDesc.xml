@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<root xmlns="urn:schemas-upnp-org:device-1-0">
+<specVersion>
+<major>1</major>
+<minor>0</minor>
+</specVersion>
+<URLBase>http://192.168.10.18:8080/</URLBase>
+<device>
+<deviceType>urn:schemas-upnp-org:device:Basic:1</deviceType>
+<friendlyName>TestApp</friendlyName>
+<manufacturer>CANON INC.</manufacturer>
+<manufacturerURL>http://www.canon.com/</manufacturerURL>
+<modelDescription>Canon Mobile Simulator</modelDescription>
+<modelName>Android 4.4.2/Nexus 5</modelName>
+<UDN>uuid:00000000-0000-0000-0000-8C3AE318CDF4</UDN>
+<serviceList>
+<service>
+<serviceType>urn:schemas-canon-com:service:CameraConnectedMobileService:1</serviceType>
+<serviceId>urn:schemas-canon-com:serviceId:CameraConnectedMobile</serviceId>
+<SCPDURL>CameraConnectedMobile.xml</SCPDURL>
+<controlURL>CameraConnectedMobile/</controlURL>
+<eventSubURL> </eventSubURL>
+<ns:X_SCPDURL xmlns:ns="urn:schemas-canon-com:schema-imink">desc_iml/CameraConnectedMobile.xml</ns:X_SCPDURL>
+<ns:X_ExtActionVer xmlns:ns="urn:schemas-canon-com:schema-imink">1.0</ns:X_ExtActionVer>
+<ns:X_VendorExtVer xmlns:ns="urn:schemas-canon-com:schema-imink">1-1401.0.0.0</ns:X_VendorExtVer>
+</service>
+</serviceList>
+<presentationURL>/</presentationURL>
+</device>
+</root>
